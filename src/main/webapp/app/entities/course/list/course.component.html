@@ -1,0 +1,198 @@
+<div>
+  <h2 id="page-heading" data-cy="CourseHeading">
+    <span jhiTranslate="lmscanvasappApp.course.home.title">Courses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="lmscanvasappApp.course.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-course"
+        [routerLink]="['/course/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="lmscanvasappApp.course.home.createLabel">Create a new Course</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (courses?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="lmscanvasappApp.course.home.notFound">No Courses found</span>
+    </div>
+  }
+
+  @if (courses && courses.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseName">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseName">Course Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseCode">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseCode">Course Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseImagePath">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseImagePath">Course Image Path</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseStartDate">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseStartDate">Course Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseEndDate">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseEndDate">Course End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courseFormat">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.courseFormat">Course Format</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="published">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.published">Published</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="selfEnrollment">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.selfEnrollment">Self Enrollment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="selfEnrollmentCode">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.selfEnrollmentCode">Self Enrollment Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="storageQuota">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.storageQuota">Storage Quota</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="account.id">
+              <div class="d-flex">
+                <span jhiTranslate="lmscanvasappApp.course.account">Account</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (course of courses; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/course', course.id, 'view']">{{ course.id }}</a>
+              </td>
+              <td>{{ course.courseName }}</td>
+              <td>{{ course.courseCode }}</td>
+              <td>{{ course.courseImagePath }}</td>
+              <td>{{ course.courseStartDate | formatMediumDatetime }}</td>
+              <td>{{ course.courseEndDate | formatMediumDatetime }}</td>
+              <td>{{ course.courseFormat }}</td>
+              <td>{{ course.published }}</td>
+              <td>{{ course.selfEnrollment }}</td>
+              <td>{{ course.selfEnrollmentCode }}</td>
+              <td>{{ course.storageQuota }}</td>
+              <td>{{ course.status }}</td>
+              <td>
+                @if (course.account) {
+                  <div>
+                    <a [routerLink]="['/accounts', course.account.id, 'view']">{{ course.account.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/course', course.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(course)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (courses && courses.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

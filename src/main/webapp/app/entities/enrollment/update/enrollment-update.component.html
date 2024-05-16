@@ -1,0 +1,172 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-enrollment-heading"
+        data-cy="EnrollmentCreateUpdateHeading"
+        jhiTranslate="lmscanvasappApp.enrollment.home.createOrEditLabel"
+      >
+        Create or edit a Enrollment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="lmscanvasappApp.enrollment.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_enrollmentStatus" jhiTranslate="lmscanvasappApp.enrollment.enrollmentStatus"
+            >Enrollment Status</label
+          >
+          <select
+            class="form-control"
+            name="enrollmentStatus"
+            formControlName="enrollmentStatus"
+            id="field_enrollmentStatus"
+            data-cy="enrollmentStatus"
+          >
+            <option [ngValue]="null">{{ 'lmscanvasappApp.EnrollmentStatusEnum.null' | translate }}</option>
+            @for (enrollmentStatusEnum of enrollmentStatusEnumValues; track $index) {
+              <option [value]="enrollmentStatusEnum">
+                {{ 'lmscanvasappApp.EnrollmentStatusEnum.' + enrollmentStatusEnum | translate }}
+              </option>
+            }
+          </select>
+          @if (
+            editForm.get('enrollmentStatus')!.invalid &&
+            (editForm.get('enrollmentStatus')!.dirty || editForm.get('enrollmentStatus')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('enrollmentStatus')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastActivityAt" jhiTranslate="lmscanvasappApp.enrollment.lastActivityAt"
+            >Last Activity At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastActivityAt"
+              data-cy="lastActivityAt"
+              type="datetime-local"
+              class="form-control"
+              name="lastActivityAt"
+              formControlName="lastActivityAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_enrollmentStartAt" jhiTranslate="lmscanvasappApp.enrollment.enrollmentStartAt"
+            >Enrollment Start At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_enrollmentStartAt"
+              data-cy="enrollmentStartAt"
+              type="datetime-local"
+              class="form-control"
+              name="enrollmentStartAt"
+              formControlName="enrollmentStartAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_enrollmentEndAt" jhiTranslate="lmscanvasappApp.enrollment.enrollmentEndAt"
+            >Enrollment End At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_enrollmentEndAt"
+              data-cy="enrollmentEndAt"
+              type="datetime-local"
+              class="form-control"
+              name="enrollmentEndAt"
+              formControlName="enrollmentEndAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_account" jhiTranslate="lmscanvasappApp.enrollment.account">Account</label>
+          <select
+            class="form-control"
+            id="field_account"
+            data-cy="account"
+            name="account"
+            formControlName="account"
+            [compareWith]="compareAccounts"
+          >
+            <option [ngValue]="null"></option>
+            @for (accountsOption of accountsSharedCollection; track $index) {
+              <option [ngValue]="accountsOption">{{ accountsOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseSection" jhiTranslate="lmscanvasappApp.enrollment.courseSection">Course Section</label>
+          <select
+            class="form-control"
+            id="field_courseSection"
+            data-cy="courseSection"
+            name="courseSection"
+            formControlName="courseSection"
+            [compareWith]="compareCourseSection"
+          >
+            <option [ngValue]="null"></option>
+            @for (courseSectionOption of courseSectionsSharedCollection; track $index) {
+              <option [ngValue]="courseSectionOption">{{ courseSectionOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_course" jhiTranslate="lmscanvasappApp.enrollment.course">Course</label>
+          <select
+            class="form-control"
+            id="field_course"
+            data-cy="course"
+            name="course"
+            formControlName="course"
+            [compareWith]="compareCourse"
+          >
+            <option [ngValue]="null"></option>
+            @for (courseOption of coursesSharedCollection; track $index) {
+              <option [ngValue]="courseOption">{{ courseOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

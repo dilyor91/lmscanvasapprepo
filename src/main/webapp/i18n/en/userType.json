@@ -1,0 +1,9 @@
+{
+  "lmscanvasappApp": {
+    "UserType": {
+      "null": "",
+      "STUDENT": "STUDENT",
+      "TEACHER": "TEACHER"
+    }
+  }
+}

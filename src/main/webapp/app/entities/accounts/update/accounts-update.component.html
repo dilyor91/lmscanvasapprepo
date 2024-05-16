@@ -1,0 +1,156 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-accounts-heading" data-cy="AccountsCreateUpdateHeading" jhiTranslate="lmscanvasappApp.accounts.home.createOrEditLabel">
+        Create or edit a Accounts
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="lmscanvasappApp.accounts.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_username" jhiTranslate="lmscanvasappApp.accounts.username">Username</label>
+          <input type="text" class="form-control" name="username" id="field_username" data-cy="username" formControlName="username" />
+          @if (editForm.get('username')!.invalid && (editForm.get('username')!.dirty || editForm.get('username')!.touched)) {
+            <div>
+              @if (editForm.get('username')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fullName" jhiTranslate="lmscanvasappApp.accounts.fullName">Full Name</label>
+          <input type="text" class="form-control" name="fullName" id="field_fullName" data-cy="fullName" formControlName="fullName" />
+          @if (editForm.get('fullName')!.invalid && (editForm.get('fullName')!.dirty || editForm.get('fullName')!.touched)) {
+            <div>
+              @if (editForm.get('fullName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sortableName" jhiTranslate="lmscanvasappApp.accounts.sortableName">Sortable Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sortableName"
+            id="field_sortableName"
+            data-cy="sortableName"
+            formControlName="sortableName"
+          />
+          @if (editForm.get('sortableName')!.invalid && (editForm.get('sortableName')!.dirty || editForm.get('sortableName')!.touched)) {
+            <div>
+              @if (editForm.get('sortableName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_avatarImageUrl" jhiTranslate="lmscanvasappApp.accounts.avatarImageUrl"
+            >Avatar Image Url</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="avatarImageUrl"
+            id="field_avatarImageUrl"
+            data-cy="avatarImageUrl"
+            formControlName="avatarImageUrl"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phone" jhiTranslate="lmscanvasappApp.accounts.phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+          @if (editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)) {
+            <div>
+              @if (editForm.get('phone')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_locale" jhiTranslate="lmscanvasappApp.accounts.locale">Locale</label>
+          <input type="text" class="form-control" name="locale" id="field_locale" data-cy="locale" formControlName="locale" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_gender" jhiTranslate="lmscanvasappApp.accounts.gender">Gender</label>
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+          @if (editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)) {
+            <div>
+              @if (editForm.get('gender')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_userType" jhiTranslate="lmscanvasappApp.accounts.userType">User Type</label>
+          <select class="form-control" name="userType" formControlName="userType" id="field_userType" data-cy="userType">
+            <option [ngValue]="null">{{ 'lmscanvasappApp.UserType.null' | translate }}</option>
+            @for (userType of userTypeValues; track $index) {
+              <option [value]="userType">{{ 'lmscanvasappApp.UserType.' + userType | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('userType')!.invalid && (editForm.get('userType')!.dirty || editForm.get('userType')!.touched)) {
+            <div>
+              @if (editForm.get('userType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_userStatus" jhiTranslate="lmscanvasappApp.accounts.userStatus">User Status</label>
+          <select class="form-control" name="userStatus" formControlName="userStatus" id="field_userStatus" data-cy="userStatus">
+            <option [ngValue]="null">{{ 'lmscanvasappApp.UserStatus.null' | translate }}</option>
+            @for (userStatus of userStatusValues; track $index) {
+              <option [value]="userStatus">{{ 'lmscanvasappApp.UserStatus.' + userStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('userStatus')!.invalid && (editForm.get('userStatus')!.dirty || editForm.get('userStatus')!.touched)) {
+            <div>
+              @if (editForm.get('userStatus')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

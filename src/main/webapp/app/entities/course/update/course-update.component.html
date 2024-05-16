@@ -1,0 +1,259 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading" jhiTranslate="lmscanvasappApp.course.home.createOrEditLabel">
+        Create or edit a Course
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="lmscanvasappApp.course.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseName" jhiTranslate="lmscanvasappApp.course.courseName">Course Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="courseName"
+            id="field_courseName"
+            data-cy="courseName"
+            formControlName="courseName"
+          />
+          @if (editForm.get('courseName')!.invalid && (editForm.get('courseName')!.dirty || editForm.get('courseName')!.touched)) {
+            <div>
+              @if (editForm.get('courseName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseCode" jhiTranslate="lmscanvasappApp.course.courseCode">Course Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="courseCode"
+            id="field_courseCode"
+            data-cy="courseCode"
+            formControlName="courseCode"
+          />
+          @if (editForm.get('courseCode')!.invalid && (editForm.get('courseCode')!.dirty || editForm.get('courseCode')!.touched)) {
+            <div>
+              @if (editForm.get('courseCode')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseImagePath" jhiTranslate="lmscanvasappApp.course.courseImagePath"
+            >Course Image Path</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="courseImagePath"
+            id="field_courseImagePath"
+            data-cy="courseImagePath"
+            formControlName="courseImagePath"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseStartDate" jhiTranslate="lmscanvasappApp.course.courseStartDate"
+            >Course Start Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_courseStartDate"
+              data-cy="courseStartDate"
+              type="datetime-local"
+              class="form-control"
+              name="courseStartDate"
+              formControlName="courseStartDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('courseStartDate')!.invalid && (editForm.get('courseStartDate')!.dirty || editForm.get('courseStartDate')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('courseStartDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('courseStartDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseEndDate" jhiTranslate="lmscanvasappApp.course.courseEndDate">Course End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_courseEndDate"
+              data-cy="courseEndDate"
+              type="datetime-local"
+              class="form-control"
+              name="courseEndDate"
+              formControlName="courseEndDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('courseEndDate')!.invalid && (editForm.get('courseEndDate')!.dirty || editForm.get('courseEndDate')!.touched)) {
+            <div>
+              @if (editForm.get('courseEndDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('courseEndDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courseFormat" jhiTranslate="lmscanvasappApp.course.courseFormat">Course Format</label>
+          <input
+            type="text"
+            class="form-control"
+            name="courseFormat"
+            id="field_courseFormat"
+            data-cy="courseFormat"
+            formControlName="courseFormat"
+          />
+          @if (editForm.get('courseFormat')!.invalid && (editForm.get('courseFormat')!.dirty || editForm.get('courseFormat')!.touched)) {
+            <div>
+              @if (editForm.get('courseFormat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_published" jhiTranslate="lmscanvasappApp.course.published">Published</label>
+          <input type="checkbox" class="form-check" name="published" id="field_published" data-cy="published" formControlName="published" />
+          @if (editForm.get('published')!.invalid && (editForm.get('published')!.dirty || editForm.get('published')!.touched)) {
+            <div>
+              @if (editForm.get('published')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_selfEnrollment" jhiTranslate="lmscanvasappApp.course.selfEnrollment">Self Enrollment</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="selfEnrollment"
+            id="field_selfEnrollment"
+            data-cy="selfEnrollment"
+            formControlName="selfEnrollment"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_selfEnrollmentCode" jhiTranslate="lmscanvasappApp.course.selfEnrollmentCode"
+            >Self Enrollment Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="selfEnrollmentCode"
+            id="field_selfEnrollmentCode"
+            data-cy="selfEnrollmentCode"
+            formControlName="selfEnrollmentCode"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_storageQuota" jhiTranslate="lmscanvasappApp.course.storageQuota">Storage Quota</label>
+          <input
+            type="number"
+            class="form-control"
+            name="storageQuota"
+            id="field_storageQuota"
+            data-cy="storageQuota"
+            formControlName="storageQuota"
+          />
+          @if (editForm.get('storageQuota')!.invalid && (editForm.get('storageQuota')!.dirty || editForm.get('storageQuota')!.touched)) {
+            <div>
+              @if (editForm.get('storageQuota')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('storageQuota')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="lmscanvasappApp.course.status">Status</label>
+          <input type="checkbox" class="form-check" name="status" id="field_status" data-cy="status" formControlName="status" />
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_account" jhiTranslate="lmscanvasappApp.course.account">Account</label>
+          <select
+            class="form-control"
+            id="field_account"
+            data-cy="account"
+            name="account"
+            formControlName="account"
+            [compareWith]="compareAccounts"
+          >
+            <option [ngValue]="null"></option>
+            @for (accountsOption of accountsCollection; track $index) {
+              <option [ngValue]="accountsOption">{{ accountsOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
