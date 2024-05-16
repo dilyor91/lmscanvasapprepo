@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20240516043908"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fullName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sortableName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "avatarImageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "locale",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "userType",
+      "fieldType": "UserType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "STUDENT,TEACHER"
+    },
+    {
+      "fieldName": "userStatus",
+      "fieldType": "UserStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,PENDING,BLOCKED"
+    }
+  ],
+  "name": "Accounts",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

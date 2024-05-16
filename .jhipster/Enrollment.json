@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20240516043909"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "enrollmentStatus",
+      "fieldType": "EnrollmentStatusEnum",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,REJECTED,PENDING"
+    },
+    {
+      "fieldName": "lastActivityAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "enrollmentStartAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "enrollmentEndAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Enrollment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "accounts",
+      "relationshipName": "account",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "courseSection",
+      "relationshipName": "courseSection",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "relationshipName": "course",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

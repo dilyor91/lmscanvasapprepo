@@ -1,0 +1,73 @@
+{
+  "annotations": {
+    "changelogDate": "20240516043906"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "courseName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "courseCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "courseImagePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "courseStartDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "courseEndDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "courseFormat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "published",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "selfEnrollment",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "selfEnrollmentCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "storageQuota",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Course",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "accounts",
+      "relationshipName": "account",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

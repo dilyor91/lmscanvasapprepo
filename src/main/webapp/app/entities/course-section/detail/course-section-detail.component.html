@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (courseSection()) {
+      <div>
+        <h2 data-cy="courseSectionDetailsHeading"><span jhiTranslate="lmscanvasappApp.courseSection.detail.title">Course Section</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ courseSection()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.courseSection.sectionName">Section Name</span></dt>
+          <dd>
+            <span>{{ courseSection()!.sectionName }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.courseSection.course">Course</span></dt>
+          <dd>
+            @if (courseSection()!.course) {
+              <div>
+                <a [routerLink]="['/course', courseSection()!.course?.id, 'view']">{{ courseSection()!.course?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/course-section', courseSection()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

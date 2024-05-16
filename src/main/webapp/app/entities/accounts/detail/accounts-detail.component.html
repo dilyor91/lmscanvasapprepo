@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (accounts()) {
+      <div>
+        <h2 data-cy="accountsDetailsHeading"><span jhiTranslate="lmscanvasappApp.accounts.detail.title">Accounts</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ accounts()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.username">Username</span></dt>
+          <dd>
+            <span>{{ accounts()!.username }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.fullName">Full Name</span></dt>
+          <dd>
+            <span>{{ accounts()!.fullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.sortableName">Sortable Name</span></dt>
+          <dd>
+            <span>{{ accounts()!.sortableName }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.avatarImageUrl">Avatar Image Url</span></dt>
+          <dd>
+            <span>{{ accounts()!.avatarImageUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.phone">Phone</span></dt>
+          <dd>
+            <span>{{ accounts()!.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.locale">Locale</span></dt>
+          <dd>
+            <span>{{ accounts()!.locale }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.gender">Gender</span></dt>
+          <dd>
+            <span>{{ accounts()!.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.userType">User Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'lmscanvasappApp.UserType.' + (accounts()!.userType ?? 'null')">{{
+              { null: '', STUDENT: 'STUDENT', TEACHER: 'TEACHER' }[accounts()!.userType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.accounts.userStatus">User Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'lmscanvasappApp.UserStatus.' + (accounts()!.userStatus ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', PENDING: 'PENDING', BLOCKED: 'BLOCKED' }[accounts()!.userStatus ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/accounts', accounts()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

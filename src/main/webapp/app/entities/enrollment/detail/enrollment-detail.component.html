@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (enrollment()) {
+      <div>
+        <h2 data-cy="enrollmentDetailsHeading"><span jhiTranslate="lmscanvasappApp.enrollment.detail.title">Enrollment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ enrollment()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.enrollmentStatus">Enrollment Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'lmscanvasappApp.EnrollmentStatusEnum.' + (enrollment()!.enrollmentStatus ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', REJECTED: 'REJECTED', PENDING: 'PENDING' }[enrollment()!.enrollmentStatus ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.lastActivityAt">Last Activity At</span></dt>
+          <dd>
+            <span>{{ enrollment()!.lastActivityAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.enrollmentStartAt">Enrollment Start At</span></dt>
+          <dd>
+            <span>{{ enrollment()!.enrollmentStartAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.enrollmentEndAt">Enrollment End At</span></dt>
+          <dd>
+            <span>{{ enrollment()!.enrollmentEndAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.account">Account</span></dt>
+          <dd>
+            @if (enrollment()!.account) {
+              <div>
+                <a [routerLink]="['/accounts', enrollment()!.account?.id, 'view']">{{ enrollment()!.account?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.courseSection">Course Section</span></dt>
+          <dd>
+            @if (enrollment()!.courseSection) {
+              <div>
+                <a [routerLink]="['/course-section', enrollment()!.courseSection?.id, 'view']">{{ enrollment()!.courseSection?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.enrollment.course">Course</span></dt>
+          <dd>
+            @if (enrollment()!.course) {
+              <div>
+                <a [routerLink]="['/course', enrollment()!.course?.id, 'view']">{{ enrollment()!.course?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/enrollment', enrollment()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,71 @@
+entity Course {
+    courseName String required
+    courseCode String required
+    courseImagePath String 
+    courseStartDate Instant required
+    courseEndDate Instant required
+    courseFormat String required
+    published Boolean required
+    selfEnrollment Boolean
+    selfEnrollmentCode String
+    storageQuota Integer required
+    status Boolean required
+}
+
+entity CourseSection {
+    sectionName String required
+}
+
+entity Accounts {
+    username String required
+    fullName String required
+    sortableName String required
+    avatarImageUrl String
+    phone String required
+    locale String
+    gender String required
+    userType UserType required
+    userStatus UserStatus required
+}
+
+entity Enrollment {
+   enrollmentStatus EnrollmentStatusEnum required
+   lastActivityAt Instant
+   enrollmentStartAt Instant
+   enrollmentEndAt Instant
+}
+
+enum EnrollmentStatusEnum {
+   ACTIVE, REJECTED, PENDING
+}
+
+enum UserType {
+  STUDENT, TEACHER
+}
+
+enum UserStatus {
+  ACTIVE, PENDING, BLOCKED
+}
+
+relationship OneToOne {
+  Course{account} to Accounts
+}
+
+relationship ManyToOne {
+    Enrollment{account} to Accounts
+    CourseSection{course} to Course
+    Enrollment{courseSection} to CourseSection
+    Enrollment{course} to Course
+}
+
+// Set pagination options
+paginate  Course, CourseSection, Enrollment, Accounts with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

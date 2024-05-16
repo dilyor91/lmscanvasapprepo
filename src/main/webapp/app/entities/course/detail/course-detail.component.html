@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (course()) {
+      <div>
+        <h2 data-cy="courseDetailsHeading"><span jhiTranslate="lmscanvasappApp.course.detail.title">Course</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ course()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseName">Course Name</span></dt>
+          <dd>
+            <span>{{ course()!.courseName }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseCode">Course Code</span></dt>
+          <dd>
+            <span>{{ course()!.courseCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseImagePath">Course Image Path</span></dt>
+          <dd>
+            <span>{{ course()!.courseImagePath }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseStartDate">Course Start Date</span></dt>
+          <dd>
+            <span>{{ course()!.courseStartDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseEndDate">Course End Date</span></dt>
+          <dd>
+            <span>{{ course()!.courseEndDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.courseFormat">Course Format</span></dt>
+          <dd>
+            <span>{{ course()!.courseFormat }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.published">Published</span></dt>
+          <dd>
+            <span>{{ course()!.published }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.selfEnrollment">Self Enrollment</span></dt>
+          <dd>
+            <span>{{ course()!.selfEnrollment }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.selfEnrollmentCode">Self Enrollment Code</span></dt>
+          <dd>
+            <span>{{ course()!.selfEnrollmentCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.storageQuota">Storage Quota</span></dt>
+          <dd>
+            <span>{{ course()!.storageQuota }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.status">Status</span></dt>
+          <dd>
+            <span>{{ course()!.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="lmscanvasappApp.course.account">Account</span></dt>
+          <dd>
+            @if (course()!.account) {
+              <div>
+                <a [routerLink]="['/accounts', course()!.account?.id, 'view']">{{ course()!.account?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/course', course()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
